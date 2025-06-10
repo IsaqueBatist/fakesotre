@@ -1,3 +1,4 @@
+import { ShoppingCart } from 'lucide-react'
 import Starts from '../../Assets/svg/mockStars.svg'
 import Category from '../category/Category'
 import {
@@ -14,23 +15,26 @@ import {
 export default function Card() {
   return (
     <CardContainer>
-      <CardImage src="https://placehold.co/220x100" />
+      <CardImage src="https://placehold.co/220x100" alt="Fjallraven - Foldsack product image" />
       <CardBody>
         <ItemName>Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops</ItemName>
         <ItemRating>
-          <img src={Starts} alt="start rating" />
+          <img src={Starts} aria-label="5 out of 5 stars" />
           <span>5 (120)</span>
         </ItemRating>
-        <span id="price">$00,00</span>
+        <strong>$00,00</strong>
         <ProductDescription>
-          Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci
-          velit...
+          Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15
+          inches) in the padded sleeve, your everyday
         </ProductDescription>
         <hr />
         <CategoryContainer>
           <Category content="man" />
         </CategoryContainer>
-        <Button>Add to Cart</Button>
+        <Button type="button">
+          <ShoppingCart size={17} />
+          <p>Add to Cart</p>
+        </Button>
       </CardBody>
     </CardContainer>
   )

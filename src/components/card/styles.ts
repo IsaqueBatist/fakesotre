@@ -1,8 +1,8 @@
 import styled from 'styled-components'
 
-export const CardContainer = styled.div`
-  width: 22rem;
-  height: 28rem;
+export const CardContainer = styled.article`
+  width: 26rem;
+  height: 36rem;
   border: 0.1rem solid black;
   background-color: ${({ theme }) => theme.colors.Neutra.light[1]};
 
@@ -27,11 +27,11 @@ export const CardBody = styled.section`
   justify-content: flex-start;
   align-items: flex-start;
 
-  gap: 0.2rem;
+  gap: 0.5rem;
 
-  span#price {
+  strong {
     color: ${({ theme }) => theme.colors.primary.main};
-    font-size: 1.8rem;
+    font-size: 2.4rem;
   }
 
   hr {
@@ -40,37 +40,47 @@ export const CardBody = styled.section`
   }
 `
 
-export const ItemName = styled.p`
+export const ItemName = styled.h3`
   color: ${({ theme }) => theme.colors.Neutra.dark[3]};
-  font-size: 1rem;
+  font-size: 1.25rem;
 `
 
-export const ItemRating = styled.div`
+export const ItemRating = styled.aside`
   display: flex;
-  background-color: yellow;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+
   img {
+    height: 1.2rem;
   }
 `
 
-export const ProductDescription = styled.div`
+export const ProductDescription = styled.p`
   color: ${({ theme }) => theme.colors.Neutra.dark[4]};
+  font-size: 1.2rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `
 
 export const CategoryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  padding: 0.5rem;
 `
 
 export const Button = styled.button`
   background-color: ${({ theme }) => theme.colors.primary.main};
   padding: 1rem 2rem;
   width: 100%;
-  height: 2.4rem;
 
   color: white;
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: bold;
+  margin-top: auto;
 
   display: flex;
   align-items: center;
