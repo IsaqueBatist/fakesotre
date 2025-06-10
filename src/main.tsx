@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import { ErrorBoundary } from 'react-error-boundary'
-import App from './App.tsx'
 import Layout from './components/Layout/Layout.tsx'
+import Home from './pages/home/Home.tsx'
 
 function fallbackRender({ error }) {
   return (
@@ -15,7 +15,7 @@ function fallbackRender({ error }) {
 createRoot(document.getElementById('root')!).render(
   <ErrorBoundary fallbackRender={fallbackRender}>
     <Layout>
-      <App />
+      <Home />
     </Layout>
   </ErrorBoundary>
 )

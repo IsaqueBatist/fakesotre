@@ -1,5 +1,6 @@
 import { ShoppingCart } from 'lucide-react'
 import Starts from '../../Assets/svg/mockStars.svg'
+import type { Product } from '../../types/product'
 import Category from '../category/Category'
 import {
   Button,
@@ -12,24 +13,27 @@ import {
   ProductDescription,
 } from './styles'
 
-export default function Card() {
+interface IProps {
+  product: Product
+}
+
+export default function Card({ product }: IProps) {
   return (
     <CardContainer>
-      <CardImage src="https://placehold.co/220x100" alt="Fjallraven - Foldsack product image" />
+      <CardImage src={product.image} alt={`${product.title} product image`} />
       <CardBody>
-        <ItemName>Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops</ItemName>
+        <ItemName>{product.title}</ItemName>
         <ItemRating>
           <img src={Starts} aria-label="5 out of 5 stars" />
-          <span>5 (120)</span>
+          <span>
+            {product.rating.rate} ({product.rating.count})
+          </span>
         </ItemRating>
-        <strong>$00,00</strong>
-        <ProductDescription>
-          Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15
-          inches) in the padded sleeve, your everyday
-        </ProductDescription>
+        <strong>${product.price}</strong>
+        <ProductDescription>{product.description}</ProductDescription>
         <hr />
         <CategoryContainer>
-          <Category content="man" />
+          <Category content={product.category} />
         </CategoryContainer>
         <Button type="button">
           <ShoppingCart size={17} />

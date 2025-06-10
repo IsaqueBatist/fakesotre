@@ -5,16 +5,24 @@ export const CardContainer = styled.article`
   height: 36rem;
   border: 0.1rem solid black;
   background-color: ${({ theme }) => theme.colors.Neutra.light[1]};
+  box-shadow: 8px 2px 20px 2px #0000000f;
 
   display: flex;
   flex-direction: column;
   margin-left: 2rem;
+
+  &:hover {
+    scale: calc(1.02);
+  }
+
+  transition: all 0.2s ease;
 `
 
 export const CardImage = styled.img`
   width: 100%;
   height: 30%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 0.5rem;
 `
 
 export const CardBody = styled.section`
