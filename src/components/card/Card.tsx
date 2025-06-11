@@ -1,5 +1,4 @@
-import { ShoppingCart } from 'lucide-react'
-import Starts from '../../Assets/svg/mockStars.svg'
+import { ShoppingCart, Star } from 'lucide-react'
 import type { Product } from '../../types/product'
 import Category from '../category/Category'
 import {
@@ -17,6 +16,20 @@ interface IProps {
   product: Product
 }
 
+const renderStars = (rate: number) => {
+  const stars = []
+
+  for (let i = 1; i <= 5; i++) {
+    if (rate >= i) {
+      stars.push(<Star key={i} size={16} fill="#ffc107" stroke="#ffc107" />)
+    } else {
+      stars.push(<Star key={i} size={16} fill="none" stroke="#ccc" />)
+    }
+  }
+
+  return stars
+}
+
 export default function Card({ product }: IProps) {
   return (
     <CardContainer>
@@ -24,7 +37,9 @@ export default function Card({ product }: IProps) {
       <CardBody>
         <ItemName>{product.title}</ItemName>
         <ItemRating>
-          <img src={Starts} aria-label="5 out of 5 stars" />
+          <div aria-label={`${product.rating.rate} out of 5 stars`}>
+            {renderStars(product.rating.rate)}
+          </div>
           <span>
             {product.rating.rate} ({product.rating.count})
           </span>
