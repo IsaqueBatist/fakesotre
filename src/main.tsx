@@ -1,7 +1,10 @@
 import { createRoot } from 'react-dom/client'
 import { ErrorBoundary } from 'react-error-boundary'
-import Layout from './components/Layout/Layout.tsx'
-import Home from './pages/home/Home.tsx'
+import { RouterProvider } from 'react-router-dom'
+import { routes } from './routes/routes.ts'
+import { ThemeProvider } from 'styled-components'
+import GlobalStyle from './styles/global.ts'
+import { theme } from './styles/theme.ts'
 
 function fallbackRender({ error }) {
   return (
@@ -14,8 +17,9 @@ function fallbackRender({ error }) {
 
 createRoot(document.getElementById('root')!).render(
   <ErrorBoundary fallbackRender={fallbackRender}>
-    <Layout>
-      <Home />
-    </Layout>
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <RouterProvider router={routes} />
+    </ThemeProvider>
   </ErrorBoundary>
 )

@@ -1,14 +1,10 @@
-import { ThemeProvider } from "styled-components";
-import Header from "../header/Header";
-import { theme } from "../../styles/theme";
-import GlobalStyle from "../../styles/global";
+import Header from '../header/Header'
 
-export default function Layout({children}) {
-    return (
-        <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <Header />
-            {children}
-        </ThemeProvider>
+export default function Layout({ children }) {
+  return (
+    <>
+      <Header />
+      {children}
+    </>
   )
 }
