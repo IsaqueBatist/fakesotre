@@ -1,10 +1,11 @@
 import { createRoot } from 'react-dom/client'
 import { ErrorBoundary } from 'react-error-boundary'
-import { RouterProvider } from 'react-router-dom'
-import { routes } from './routes/routes.ts'
+import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
+
 import GlobalStyle from './styles/global.ts'
 import { theme } from './styles/theme.ts'
+import AppRoutes from './routes/AppRoutes.tsx'
 
 function fallbackRender({ error }) {
   return (
@@ -19,7 +20,9 @@ createRoot(document.getElementById('root')!).render(
   <ErrorBoundary fallbackRender={fallbackRender}>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <RouterProvider router={routes} />
+      <BrowserRouter>
+        <AppRoutes />
+      </BrowserRouter>
     </ThemeProvider>
   </ErrorBoundary>
 )

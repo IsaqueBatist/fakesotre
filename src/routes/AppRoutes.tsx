@@ -1,0 +1,21 @@
+import { Route, Routes } from 'react-router-dom'
+import Layout from '../components/Layout/Layout'
+import Home from '../pages/home/Home'
+import Login from '../pages/Login/Login'
+import ProductDetail from '../pages/ProductDetail/ProductDetail'
+import Register from '../pages/Register/Register'
+
+export default function AppRoutes() {
+  return (
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Home />}></Route>
+        <Route path="productDetail/:id" element={<ProductDetail />}></Route>
+      </Route>
+      <Route path="auth">
+        <Route path="login" element={<Login />}></Route>
+        <Route path="register" element={<Register />}></Route>
+      </Route>
+    </Routes>
+  )
+}
