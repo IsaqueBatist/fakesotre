@@ -13,14 +13,8 @@ export default function Login() {
       <FormLogin>
         <FormTittle>Login</FormTittle>
         <InputForm>
-          <label htmlFor="iemail">Email</label>
-          <input
-            required
-            type="email"
-            id="iemail"
-            placeholder="example@gmail.com"
-            autoComplete="email"
-          />
+          <label htmlFor="iemail">Username</label>
+          <input required type="text" id="iemail" placeholder="username" autoComplete="username" />
         </InputForm>
         <InputForm>
           <label htmlFor="ipassword">Password</label>
