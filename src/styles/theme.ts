@@ -52,5 +52,5 @@ export const theme: ITheme = {
       heading: 'Poppins, sans-serif'
     },
     borderRadius: '8px',
-    spacing: (factor?: number) => `${factor} * 8`
+    spacing: (factor?: number) => `${factor} * 8px`
 }
