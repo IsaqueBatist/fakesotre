@@ -21,6 +21,7 @@ export const FormLogin = styled.form`
   align-items: center;
 
   padding: 2rem;
+  box-shadow: 6px 5px 16px 1px #0000002e;
 `
 
 export const FormTittle = styled.h2`
@@ -78,4 +79,9 @@ export const HelpText = styled.p`
   a {
     color: ${({ theme }) => theme.colors.primary.medium};
   }
+`
+
+export const ErrorMessage = styled.p`
+  color: red;
+  font-size: 1.2rem;
 `
