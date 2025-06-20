@@ -10,7 +10,7 @@ import {
   MainLoginContainer,
   SubmmitButton,
 } from "./styles";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/user/slice";
 import type { IUserDataLogin } from "../../types/authService";
@@ -40,10 +40,8 @@ export default function Login() {
   const onSubmit = async (data: IUserDataLogin) => {
     try {
       await searchToken(data);
-
       const user: IUser = await filterUserByUsername(data.username);
       dispatch(login(user));
-
       navigate("/");
     } catch (err: unknown) {
       const message =
