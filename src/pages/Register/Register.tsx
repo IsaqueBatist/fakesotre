@@ -6,8 +6,7 @@ import {
   InputForm,
   SubmitButton,
   HelpText,
-  ErrorMessage,
-  FieldGroup,
+  ErrorMessage
 } from "./styles";
 import { Link } from "react-router-dom";
 import type { IFormRegisterData } from "../../types/formRegisterData";
@@ -57,34 +56,31 @@ export default function Register() {
           />
           {errors.email && <ErrorMessage>{errors.email.message}</ErrorMessage>}
         </InputForm>
-
-        <FieldGroup>
-          <InputForm>
-            <label>Password</label>
-            <input
-              type="password"
-              autoComplete="new-password"
-              {...register("password", { required: "This fild is requirted" })}
-            />
-            {errors.password && (
-              <ErrorMessage>{errors.password.message}</ErrorMessage>
-            )}
-          </InputForm>
-          <InputForm>
-            <label>Confirm Password</label>
-            <input
-              type="password"
-              {...register("confirmPassword", {
-                required: "This fild is requirted",
-                validate: (value) =>
-                  value === password || "Passwords do not match",
-              })}
-            />
-            {errors.confirmPassword && (
-              <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
-            )}
-          </InputForm>
-        </FieldGroup>
+        <InputForm>
+          <label>Password</label>
+          <input
+            type="password"
+            autoComplete="new-password"
+            {...register("password", { required: "This fild is requirted" })}
+          />
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
+        </InputForm>
+        <InputForm>
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            {...register("confirmPassword", {
+              required: "This fild is requirted",
+              validate: (value) =>
+                value === password || "Passwords do not match",
+            })}
+          />
+          {errors.confirmPassword && (
+            <ErrorMessage>{errors.confirmPassword?.message}</ErrorMessage>
+          )}
+        </InputForm>
 
         <SubmitButton type="submit">Register</SubmitButton>
 

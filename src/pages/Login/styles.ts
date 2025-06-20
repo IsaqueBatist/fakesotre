@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components";
 
 export const MainLoginContainer = styled.div`
   width: 100%;
@@ -7,7 +7,7 @@ export const MainLoginContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 export const FormLogin = styled.form`
   width: 40rem;
@@ -22,14 +22,14 @@ export const FormLogin = styled.form`
 
   padding: 2rem;
   box-shadow: 6px 5px 16px 1px #0000002e;
-`
+`;
 
 export const FormTittle = styled.h2`
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 4rem;
   color: ${({ theme }) => theme.colors.primary.main};
   font-weight: bold;
-`
+`;
 
 export const InputForm = styled.div`
   width: 100%;
@@ -57,7 +57,7 @@ export const InputForm = styled.div`
       box-shadow: -1px 0px 6px 2px ${({ theme }) => theme.colors.primary.light};
     }
   }
-`
+`;
 
 export const SubmmitButton = styled.button`
   padding: 1.5rem 2rem;
@@ -67,21 +67,23 @@ export const SubmmitButton = styled.button`
   border: none;
   color: ${({ theme }) => theme.colors.Neutra.light[1]};
   font-size: 1.2rem;
+  font-weight: bold;
 
   &:hover {
     background-color: ${({ theme }) => theme.colors.seconday.main};
     cursor: pointer;
   }
-`
+`;
 
 export const HelpText = styled.p`
   font-size: 1.2rem;
+  text-align: center;
   a {
     color: ${({ theme }) => theme.colors.primary.medium};
   }
-`
+`;
 
 export const ErrorMessage = styled.p`
   color: red;
   font-size: 1.2rem;
-`
+`;

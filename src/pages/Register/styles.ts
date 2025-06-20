@@ -1,5 +1,5 @@
 // RegisterStyles.ts
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const MainRegisterContainer = styled.div`
   width: 100%;
@@ -10,8 +10,8 @@ export const MainRegisterContainer = styled.div`
 `;
 
 export const FormRegister = styled.form`
-  width: 60rem;
-  background-color: ${({ theme }) => theme.colors.Neutra.light[3]};
+  width: 40rem;
+  background-color: ${({ theme }) => theme.colors.Neutra.light[2]};
   border-radius: ${({ theme }) => theme.borderRadius};
   padding: 2rem;
   box-shadow: 6px 5px 16px 1px #0000002e;
@@ -24,20 +24,9 @@ export const FormRegister = styled.form`
 export const FormTitle = styled.h2`
   font-family: ${({ theme }) => theme.fonts.heading};
   font-size: 4rem;
-  color: ${({ theme }) => theme.colors.seconday.main};
+  color: ${({ theme }) => theme.colors.primary.main};
   font-weight: bold;
   text-align: center;
-`;
-
-export const FieldGroup = styled.div`
-  display: flex;
-  gap: 1.2rem;
-  flex-wrap: wrap;
-
-  > div {
-    flex: 1;
-    min-width: 250px;
-  }
 `;
 
 export const InputForm = styled.div`
@@ -74,7 +63,7 @@ export const SubmitButton = styled.button`
   font-weight: bold;
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.primary.medium};
+    background-color: ${({ theme }) => theme.colors.seconday.main};
     cursor: pointer;
   }
 `;
@@ -88,6 +77,6 @@ export const HelpText = styled.p`
   font-size: 1.2rem;
   text-align: center;
   a {
-    color: ${({ theme }) => theme.colors.primary.main};
+    color: ${({ theme }) => theme.colors.primary.medium};
   }
 `;
