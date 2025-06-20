@@ -1,6 +1,6 @@
-import { useForm } from 'react-hook-form'
-import type { IFormLoginData } from '../../types/formLoginData'
-import { loginUser } from '../../utils/loginUser'
+import { useForm } from "react-hook-form";
+import type { IFormLoginData } from "../../types/formLoginData";
+import { searchToken } from "../../utils/searchToken";
 import {
   ErrorMessage,
   FormLogin,
@@ -9,13 +9,18 @@ import {
   InputForm,
   MainLoginContainer,
   SubmmitButton,
-} from './styles'
-import { useNavigate } from 'react-router-dom'
+} from "./styles";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/user/slice";
+import type { IUserDataLogin } from "../../types/authService";
+import { filterUserByUsername } from "../../services/user";
+import type { IUser } from "../../types/user";
 
 const defaultValues: IFormLoginData = {
-  password: '',
-  username: '',
-}
+  password: "",
+  username: "",
+};
 
 export default function Login() {
   const {
@@ -25,17 +30,27 @@ export default function Login() {
     formState: { errors, isValid },
   } = useForm<IFormLoginData>({
     defaultValues,
-    mode: 'onBlur',
-  })
+    mode: "onBlur",
+  });
 
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
 
-  const onSubmit = (data: IFormLoginData) => {
-    if (isValid) {
-      loginUser(data)
-      reset()
+  const navigate = useNavigate();
+
+  const onSubmit = async (data: IUserDataLogin) => {
+    try {
+      await searchToken(data);
+
+      const user: IUser = await filterUserByUsername(data.username);
+      dispatch(login(user));
+
+      navigate("/");
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Erro inesperado ao fazer login.";
+      alert(message);
     }
-  }
+  };
 
   return (
     <MainLoginContainer>
@@ -47,18 +62,22 @@ export default function Login() {
             type="text"
             placeholder="username"
             autoComplete="username"
-            {...register('username', { required: 'This fild is required' })}
+            {...register("username", { required: "This fild is required" })}
           />
-          {errors.username && <ErrorMessage>{errors.username.message}</ErrorMessage>}
+          {errors.username && (
+            <ErrorMessage>{errors.username.message}</ErrorMessage>
+          )}
         </InputForm>
         <InputForm>
           <label htmlFor="password">Password</label>
           <input
             type="password"
             autoComplete="current-password"
-            {...register('password', { required: 'This fild is required' })}
+            {...register("password", { required: "This fild is required" })}
           />
-          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
+          {errors.password && (
+            <ErrorMessage>{errors.password.message}</ErrorMessage>
+          )}
         </InputForm>
         <SubmmitButton type="submit" aria-label="Log in to your account">
           Log in
@@ -69,5 +88,5 @@ export default function Login() {
         </HelpText>
       </FormLogin>
     </MainLoginContainer>
-  )
+  );
 }
