@@ -1,6 +1,6 @@
-import { ShoppingCart, Star } from 'lucide-react'
-import type { Product } from '../../types/product'
-import Category from '../category/Category'
+import { ShoppingCart, Star } from "lucide-react";
+import type { Product } from "../../types/product";
+import Category from "../category/Category";
 import {
   Button,
   CardBody,
@@ -10,25 +10,24 @@ import {
   ItemName,
   ItemRating,
   ProductDescription,
-} from './styles'
+} from "./styles";
 
 interface IProps {
-  product: Product
+  product: Product;
 }
 
 const renderStars = (rate: number) => {
-  const stars = []
-
+  const stars = [];
   for (let i = 1; i <= 5; i++) {
     if (rate >= i) {
-      stars.push(<Star key={i} size={16} fill="#ffc107" stroke="#ffc107" />)
+      stars.push(<Star key={i} size={16} fill="#ffc107" stroke="#ffc107" />);
     } else {
-      stars.push(<Star key={i} size={16} fill="none" stroke="#ccc" />)
+      stars.push(<Star key={i} size={16} fill="none" stroke="#ccc" />);
     }
   }
 
-  return stars
-}
+  return stars;
+};
 
 export default function Card({ product }: IProps) {
   return (
@@ -56,5 +55,5 @@ export default function Card({ product }: IProps) {
         </Button>
       </CardBody>
     </CardContainer>
-  )
+  );
 }

@@ -10,7 +10,7 @@ import {
   MainLoginContainer,
   SubmmitButton,
 } from "./styles";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../redux/user/slice";
 import type { IUserDataLogin } from "../../types/authService";
@@ -27,7 +27,7 @@ export default function Login() {
     register,
     reset,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<IFormLoginData>({
     defaultValues,
     mode: "onBlur",
@@ -47,6 +47,8 @@ export default function Login() {
       const message =
         err instanceof Error ? err.message : "Erro inesperado ao fazer login.";
       alert(message);
+    } finally {
+      reset();
     }
   };
 
@@ -82,7 +84,7 @@ export default function Login() {
         </SubmmitButton>
         <HelpText role="note">
           Don't have an account?
-          <a href="/auth/register"> Register</a>
+          <Link to="/auth/register"> Register</Link>
         </HelpText>
       </FormLogin>
     </MainLoginContainer>

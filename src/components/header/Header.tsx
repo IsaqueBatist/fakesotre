@@ -14,6 +14,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
 import { logout } from "../../redux/user/slice";
+import { Link } from "react-router-dom";
 
 export default function Header() {
   const username = useSelector(
@@ -36,7 +37,7 @@ export default function Header() {
       <Navbar>
         <ul>
           <li>
-            <a href="#">Products</a>
+            <Link to="/">Products</Link>
           </li>
         </ul>
       </Navbar>
