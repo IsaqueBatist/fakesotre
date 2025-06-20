@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
     color: ${({ theme }) => theme.colors?.Neutra?.dark?.[1] || '#000'};
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
     }
 
     *, *::before, *::after {
