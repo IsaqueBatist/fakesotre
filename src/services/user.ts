@@ -1,3 +1,5 @@
+import type { AxiosResponse } from "axios";
+import type { IFormRegisterData } from "../types/formRegisterData";
 import type { IUser } from "../types/user";
 import api from "./api";
 
@@ -20,4 +22,13 @@ export const filterUserByUsername = async (
   if (!user) throw new Error("User not found");
 
   return user;
+};
+
+export const addUser = async (
+  userData: IFormRegisterData
+): Promise<AxiosResponse> => {
+  return await api.post("/users", JSON.stringify(userData), {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  });
 };

@@ -6,10 +6,11 @@ import {
   InputForm,
   SubmitButton,
   HelpText,
-  ErrorMessage
+  ErrorMessage,
 } from "./styles";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import type { IFormRegisterData } from "../../types/formRegisterData";
+import { addUser, getAllUser } from "../../services/user";
 
 type IFormRegisterForm = IFormRegisterData & {
   confirmPassword: string;
@@ -20,14 +21,25 @@ export default function Register() {
     register,
     handleSubmit,
     watch,
+    reset,
     formState: { errors },
-  } = useForm<IFormRegisterForm>();
+  } = useForm<IFormRegisterForm>({
+    mode: 'onBlur'
+  });
 
-  const onSubmit = (data: IFormRegisterForm) => {
-    console.log("Submitted:", data);
+  const navigate = useNavigate();
+
+  const onSubmit = async (data: IFormRegisterForm) => {
+    try {
+      const { confirmPassword, ...userData } = data;
+      await addUser(userData);
+      navigate("/auth/login");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      reset();
+    }
   };
-
-  console.log(errors);
 
   const password = watch("password");
 
