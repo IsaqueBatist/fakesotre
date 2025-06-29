@@ -84,7 +84,7 @@ export const DropdownMenu = styled.div`
     display: block;
     padding: 10px;
     text-decoration: none;
-    color: ${({theme}) => theme.colors.Neutra.dark[1]};
+    color: ${({ theme }) => theme.colors.Neutra.dark[1]};
 
     &:hover {
       background-color: #f0f0f0;

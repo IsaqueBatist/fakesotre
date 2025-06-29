@@ -1,14 +1,14 @@
-import { useEffect, useState } from 'react'
-import Card from '../../components/card/Card'
-import { getAllProducts } from '../../services/products'
-import type { Product } from '../../types/product'
-import { CardsContainer } from './styles'
+import { useEffect, useState } from "react";
+import Card from "../../components/card/Card";
+import { getAllProducts } from "../../services/products";
+import type { Product } from "../../types/product";
+import { CardsContainer } from "./styles";
 
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([])
+  const [products, setProducts] = useState<Product[]>([]);
 
   useEffect(() => {
-    getAllProducts().then(setProducts)
+    getAllProducts().then(setProducts);
 
     /*Função para remover fundo
     OBS: Não está implementada pela limitação de requisições
@@ -35,7 +35,13 @@ export default function Home() {
 
     removeBgFromImages()
     */
-  }, [])
+  }, []);
 
-  return <CardsContainer>{products && products.map((p) => <Card key={p.id} product={p} />)}</CardsContainer>
+  return (
+    <>
+      <CardsContainer>
+        {products && products.map((p) => <Card key={p.id} product={p} />)}
+      </CardsContainer>
+    </>
+  );
 }

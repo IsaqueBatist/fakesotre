@@ -15,8 +15,12 @@ import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../redux/store";
 import { logout } from "../../redux/user/slice";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import Cart from "../Cart/Cart";
 
 export default function Header() {
+  const [cartVisibla, setCartVisible] = useState(false);
+
   const username = useSelector(
     (state: RootState) => state.userReducer.currentUser?.username
   );
@@ -51,7 +55,8 @@ export default function Header() {
             </button>
           </DropdownMenu>
         </ProfileWrapper>
-        <ShoppingCart size={30} />
+        <ShoppingCart size={30} onClick={() => setCartVisible(true)} />
+        <Cart isVisible={cartVisibla} setCartVisible={setCartVisible} />
       </UserContainer>
     </MainContainer>
   );
