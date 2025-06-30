@@ -33,15 +33,15 @@ const cartSlice = createSlice({
         .filter((p) => p.quantity > 0);
     },
     addItem: (state, action: PayloadAction<CartProduct>) => {
-      const alredyExiste = state.products.find(
+      const alredyExist = state.products.find(
         (p) => p.id === action.payload.id
       );
-      if (alredyExiste) {
+      if (alredyExist) {
         state.products = state.products.map((p) =>
           p.id === action.payload.id ? { ...p, quantity: p.quantity + 1 } : p
-        );
+        )
       } else {
-        state.products.push(action.payload);
+        state.products.push(action.payload)
       }
     },
     setCart: (state, action: PayloadAction<CartProduct[]>) => {

@@ -1,14 +1,24 @@
-import { useEffect, useState } from "react";
-import Card from "../../components/card/Card";
-import { getAllProducts } from "../../services/products";
-import type { Product } from "../../types/product";
-import { CardsContainer } from "./styles";
+import { useEffect, useMemo, useState } from 'react'
+import Card from '../../components/card/Card'
+import { getAllCategories } from '../../services/category'
+import { getAllProducts } from '../../services/products'
+import type { Product } from '../../types/product'
+import {
+  CardsContainer,
+  CategoriesContainer,
+  Category,
+  CategoryDisabled,
+  FiltersContainer,
+} from './styles'
 
 export default function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<Product[]>([])
+  const [categories, setCategories] = useState<string[]>([])
+  const [selectedCategory, setSelectedCategory] = useState('')
 
   useEffect(() => {
-    getAllProducts().then(setProducts);
+    getProducts()
+    getAllCategories().then(setCategories)
 
     /*Função para remover fundo
     OBS: Não está implementada pela limitação de requisições
@@ -35,13 +45,35 @@ export default function Home() {
 
     removeBgFromImages()
     */
-  }, []);
+  }, [])
+
+  const getProducts = async () => {
+    const data = await getAllProducts()
+    setProducts(data)
+  }
+
+  const filterProducts = useMemo(() => {
+    if (!selectedCategory) return products
+    return products.filter((p) => p.category === selectedCategory)
+  }, [products, selectedCategory])
 
   return (
     <>
+      <FiltersContainer>
+        <CategoriesContainer>
+          {categories &&
+            categories.map((c) =>
+              c === selectedCategory ? (
+                <Category onClick={() => setSelectedCategory('')}>{c}</Category>
+              ) : (
+                <CategoryDisabled onClick={() => setSelectedCategory(c)}>{c}</CategoryDisabled>
+              )
+            )}
+        </CategoriesContainer>
+      </FiltersContainer>
       <CardsContainer>
-        {products && products.map((p) => <Card key={p.id} product={p} />)}
+        {filterProducts && filterProducts.map((p) => <Card key={p.id} product={p} />)}
       </CardsContainer>
     </>
-  );
+  )
 }
