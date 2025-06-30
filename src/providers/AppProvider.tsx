@@ -5,6 +5,7 @@ import GlobalStyle from "../styles/global";
 import { theme } from "../styles/theme";
 import { Provider } from "react-redux";
 import store from "../redux/store";
+import { ToastContainer } from "react-toastify";
 
 const fallbackRender = ({ error }: { error: Error }) => (
   <div role="alert">
@@ -18,10 +19,11 @@ export default function AppProvider({ children }: { children: ReactNode }) {
     <ErrorBoundary fallbackRender={fallbackRender}>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
+          <ToastContainer />
           <GlobalStyle />
           {children}
         </Provider>
       </ThemeProvider>
     </ErrorBoundary>
-  );
+  )
 }
