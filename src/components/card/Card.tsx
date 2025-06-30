@@ -1,6 +1,8 @@
-import { ShoppingCart, Star } from "lucide-react";
-import type { Product } from "../../types/product";
-import Category from "../category/Category";
+import { ShoppingCart, Star } from 'lucide-react'
+import { useDispatch } from 'react-redux'
+import { addItem } from '../../redux/cart/slice'
+import type { Product } from '../../types/product'
+import Category from '../category/Category'
 import {
   Button,
   CardBody,
@@ -10,26 +12,24 @@ import {
   ItemName,
   ItemRating,
   ProductDescription,
-} from "./styles";
-import { useDispatch } from "react-redux";
-import { addItem } from "../../redux/cart/slice";
+} from './styles'
 
 interface IProps {
-  product: Product;
+  product: Product
 }
 
 const renderStars = (rate: number) => {
-  const stars = [];
+  const stars = []
   for (let i = 1; i <= 5; i++) {
     if (rate >= i) {
-      stars.push(<Star key={i} size={16} fill="#ffc107" stroke="#ffc107" />);
+      stars.push(<Star key={i} size={16} fill="#ffc107" stroke="#ffc107" />)
     } else {
-      stars.push(<Star key={i} size={16} fill="none" stroke="#ccc" />);
+      stars.push(<Star key={i} size={16} fill="none" stroke="#ccc" />)
     }
   }
 
-  return stars;
-};
+  return stars
+}
 
 export default function Card({ product }: IProps) {
   const dispatch = useDispatch()
@@ -52,11 +52,11 @@ export default function Card({ product }: IProps) {
         <CategoryContainer>
           <Category content={product.category} />
         </CategoryContainer>
-        <Button type="button" onClick={() => dispatch(addItem({...product, quantity: 1}))}>
+        <Button type="button" onClick={() => dispatch(addItem({ ...product, quantity: 1 }))}>
           <ShoppingCart size={17} />
           <p>Add to Cart</p>
         </Button>
       </CardBody>
     </CardContainer>
-  );
+  )
 }

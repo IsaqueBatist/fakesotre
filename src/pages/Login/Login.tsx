@@ -16,6 +16,7 @@ import { login } from "../../redux/user/slice";
 import type { IUserDataLogin } from "../../types/authService";
 import { filterUserByUsername } from "../../services/user";
 import type { IUser } from "../../types/user";
+import { Bounce, toast } from "react-toastify";
 
 const defaultValues: IFormLoginData = {
   password: "",
@@ -37,11 +38,28 @@ export default function Login() {
 
   const navigate = useNavigate();
 
+const notify = () =>
+  toast.success('Login successful', {
+    position: 'top-right',
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: false,
+    pauseOnHover: false,
+    draggable: false,
+    progress: undefined,
+    theme: 'light',
+    style: {
+      fontSize: `1.5rem`
+    },
+    transition: Bounce,
+  })
+
   const onSubmit = async (data: IUserDataLogin) => {
     try {
       await searchToken(data);
       const user: IUser = await filterUserByUsername(data.username);
       dispatch(login(user));
+      notify()
       navigate("/");
     } catch (err: unknown) {
       const message =
