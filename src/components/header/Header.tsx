@@ -1,5 +1,12 @@
-import { ShoppingCart } from "lucide-react";
-import Logo from "../../assets/svg/fakestore.svg";
+import { ShoppingCart } from 'lucide-react'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
+import Logo from '../../assets/svg/fakestore.svg'
+import { selectProductsCount } from '../../redux/cart/cart.selectors'
+import type { RootState } from '../../redux/store'
+import { logout } from '../../redux/user/slice'
+import Cart from '../Cart/Cart'
 import {
   DropdownMenu,
   ImageContainer,
@@ -10,30 +17,21 @@ import {
   UserContainer,
   UserName,
   UserProfile,
-} from "./styles";
-import { useDispatch, useSelector } from "react-redux";
-import type { RootState } from "../../redux/store";
-import { logout } from "../../redux/user/slice";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import Cart from "../Cart/Cart";
-import { selectProductsCount } from "../../redux/cart/cart.selectors";
+} from './styles'
 
 export default function Header() {
-  const [cartVisibla, setCartVisible] = useState(false);
+  const [cartVisibla, setCartVisible] = useState(false)
 
-  const username = useSelector(
-    (state: RootState) => state.userReducer.currentUser?.username
-  );
+  const username = useSelector((state: RootState) => state.userReducer.currentUser?.username)
 
   const productCount = useSelector(selectProductsCount)
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   const handleLogout = () => {
-    dispatch(logout());
-    localStorage.removeItem("token");
-  };
+    dispatch(logout())
+    localStorage.removeItem('token')
+  }
 
   return (
     <MainContainer>
@@ -51,7 +49,7 @@ export default function Header() {
       <UserContainer role="complementary">
         <UserName>{username}</UserName>
         <ProfileWrapper>
-          <UserProfile src="https://placehold.co/50" />
+          <UserProfile src={`https://api.dicebear.com/7.x/adventurer/svg?seed=${username}`} />
           <DropdownMenu>
             <button type="button" onClick={handleLogout}>
               Sair
@@ -59,9 +57,8 @@ export default function Header() {
           </DropdownMenu>
         </ProfileWrapper>
         <ShoppingCart size={30} onClick={() => setCartVisible(true)} />
-        <Cart isVisible={cartVisibla} setCartVisible={setCartVisible} />
-        ({productCount})
+        <Cart isVisible={cartVisibla} setCartVisible={setCartVisible} />({productCount})
       </UserContainer>
     </MainContainer>
-  );
+  )
 }

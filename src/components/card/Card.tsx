@@ -46,7 +46,7 @@ export default function Card({ product }: IProps) {
             {product.rating.rate} ({product.rating.count})
           </span>
         </ItemRating>
-        <strong>${product.price}</strong>
+        <strong>${product.price.toFixed(2)}</strong>
         <ProductDescription>{product.description}</ProductDescription>
         <hr />
         <CategoryContainer>

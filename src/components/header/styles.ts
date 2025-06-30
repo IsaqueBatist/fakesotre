@@ -59,10 +59,9 @@ export const UserProfile = styled.img`
   width: 5rem;
   height: 5rem;
   border-radius: 50%;
-  outline: 0.05rem solid black;
   cursor: pointer;
   position: relative;
-`;
+`
 
 export const DropdownMenu = styled.div`
   position: absolute;
