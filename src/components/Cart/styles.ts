@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const CartSidebar = styled.aside<{ visible: boolean }>`
   position: fixed;
   top: 0;
-  right: ${({ visible }) => (visible ? '0' : '-400px')};
+  right: ${({ visible }) => (visible ? "0" : "-400px")};
   width: 400px;
   height: 100vh;
   background-color: #fff;
@@ -11,6 +11,7 @@ export const CartSidebar = styled.aside<{ visible: boolean }>`
   padding: 2rem;
   transition: right 0.3s ease;
   z-index: 1000;
+  color: ${({ theme }) => theme.colors.Neutra.dark[1]};
 `;
 
 export const CloseButton = styled.button`

@@ -58,3 +58,10 @@ export const RemoveButton = styled(IconButton)`
     background-color: #fddede;
   }
 `;
+
+
+export const CartTotal = styled.p`
+text-align: center;
+  font-weight: 600;
+  font-size: 2rem;
+`

@@ -11,6 +11,8 @@ import {
   ItemRating,
   ProductDescription,
 } from "./styles";
+import { useDispatch } from "react-redux";
+import { addItem } from "../../redux/cart/slice";
 
 interface IProps {
   product: Product;
@@ -30,6 +32,7 @@ const renderStars = (rate: number) => {
 };
 
 export default function Card({ product }: IProps) {
+  const dispatch = useDispatch()
   return (
     <CardContainer>
       <CardImage src={product.image} alt={`${product.title} product image`} />
@@ -49,7 +52,7 @@ export default function Card({ product }: IProps) {
         <CategoryContainer>
           <Category content={product.category} />
         </CategoryContainer>
-        <Button type="button">
+        <Button type="button" onClick={() => dispatch(addItem({...product, quantity: 1}))}>
           <ShoppingCart size={17} />
           <p>Add to Cart</p>
         </Button>
