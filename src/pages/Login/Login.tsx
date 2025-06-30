@@ -1,6 +1,13 @@
-import { useForm } from "react-hook-form";
-import type { IFormLoginData } from "../../types/formLoginData";
-import { searchToken } from "../../utils/searchToken";
+import { useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { Bounce, toast } from 'react-toastify'
+import { login } from '../../redux/user/slice'
+import { filterUserByUsername } from '../../services/user'
+import type { IUserDataLogin } from '../../types/authService'
+import type { IFormLoginData } from '../../types/formLoginData'
+import type { IUser } from '../../types/user'
+import { searchToken } from '../../utils/searchToken'
 import {
   ErrorMessage,
   FormLogin,
@@ -9,19 +16,12 @@ import {
   InputForm,
   MainLoginContainer,
   SubmmitButton,
-} from "./styles";
-import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { login } from "../../redux/user/slice";
-import type { IUserDataLogin } from "../../types/authService";
-import { filterUserByUsername } from "../../services/user";
-import type { IUser } from "../../types/user";
-import { Bounce, toast } from "react-toastify";
+} from './styles'
 
 const defaultValues: IFormLoginData = {
-  password: "",
-  username: "",
-};
+  password: '',
+  username: '',
+}
 
 export default function Login() {
   const {
@@ -31,44 +31,59 @@ export default function Login() {
     formState: { errors },
   } = useForm<IFormLoginData>({
     defaultValues,
-    mode: "onBlur",
-  });
-
-  const dispatch = useDispatch();
-
-  const navigate = useNavigate();
-
-const notify = () =>
-  toast.success('Login successful', {
-    position: 'top-right',
-    autoClose: 5000,
-    hideProgressBar: false,
-    closeOnClick: false,
-    pauseOnHover: false,
-    draggable: false,
-    progress: undefined,
-    theme: 'light',
-    style: {
-      fontSize: `1.5rem`
-    },
-    transition: Bounce,
+    mode: 'onBlur',
   })
+
+  const dispatch = useDispatch()
+
+  const navigate = useNavigate()
+
+  const notify = () =>
+    toast.success('Login successful', {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: 'light',
+      style: {
+        fontSize: `1.5rem`,
+      },
+      transition: Bounce,
+    })
+
+  const notifyError = (message: string) =>
+    toast.error(message, {
+      position: 'top-right',
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: false,
+      draggable: false,
+      progress: undefined,
+      theme: 'light',
+      style: {
+        fontSize: `1.5rem`,
+      },
+      transition: Bounce,
+    })
 
   const onSubmit = async (data: IUserDataLogin) => {
     try {
-      await searchToken(data);
-      const user: IUser = await filterUserByUsername(data.username);
-      dispatch(login(user));
+      await searchToken(data)
+      const user: IUser = await filterUserByUsername(data.username)
+      dispatch(login(user))
       notify()
-      navigate("/");
+      navigate('/')
     } catch (err: unknown) {
-      const message =
-        err instanceof Error ? err.message : "Erro inesperado ao fazer login.";
-      alert(message);
+      const message = err instanceof Error ? err.message : 'Unexpected error while logging in.'
+      notifyError(message)
     } finally {
-      reset();
+      reset()
     }
-  };
+  }
 
   return (
     <MainLoginContainer>
@@ -80,22 +95,18 @@ const notify = () =>
             type="text"
             placeholder="username"
             autoComplete="username"
-            {...register("username", { required: "This fild is required" })}
+            {...register('username', { required: 'This fild is required' })}
           />
-          {errors.username && (
-            <ErrorMessage>{errors.username.message}</ErrorMessage>
-          )}
+          {errors.username && <ErrorMessage>{errors.username.message}</ErrorMessage>}
         </InputForm>
         <InputForm>
           <label htmlFor="password">Password</label>
           <input
             type="password"
             autoComplete="current-password"
-            {...register("password", { required: "This fild is required" })}
+            {...register('password', { required: 'This fild is required' })}
           />
-          {errors.password && (
-            <ErrorMessage>{errors.password.message}</ErrorMessage>
-          )}
+          {errors.password && <ErrorMessage>{errors.password.message}</ErrorMessage>}
         </InputForm>
         <SubmmitButton type="submit" aria-label="Log in to your account">
           Log in
@@ -106,5 +117,5 @@ const notify = () =>
         </HelpText>
       </FormLogin>
     </MainLoginContainer>
-  );
+  )
 }
