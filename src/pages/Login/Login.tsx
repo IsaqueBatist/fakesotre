@@ -1,3 +1,5 @@
+import axios from 'axios'
+import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
@@ -84,6 +86,27 @@ export default function Login() {
       reset()
     }
   }
+  useEffect(() => {
+    const restoreSession = async () => {
+      const token = localStorage.getItem('token')
+      console.log(token)
+      if (token) {
+        try {
+          axios.defaults.headers.common['Authorization'] = JSON.parse(token)
+
+          const username = localStorage.getItem('username')
+          if (!username) return
+          const user = await filterUserByUsername(username)
+          dispatch(login(user))
+        } catch (err) {
+          console.log(err)
+          notifyError('Error restoring session')
+        }
+      }
+    }
+
+    restoreSession()
+  }, [])
 
   return (
     <MainLoginContainer>

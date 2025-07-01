@@ -17,7 +17,10 @@ export const filterUserByUsername = async (
   username: string
 ): Promise<IUser> => {
   const users = await getAllUser();
-  const user = users.find((u) => u.username === username);
+  const user = users.find((u) => u.username.toLowerCase() === username.toLowerCase())
+  console.log("Username", username)
+  console.log("Users", users)
+  console.log("User", user)
 
   if (!user) throw new Error("User not found");
 

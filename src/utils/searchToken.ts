@@ -26,6 +26,7 @@ export const searchToken = async (userData: IUserDataLogin): Promise<string | un
       throw new Error('Invalid or missing token.')
     }
     localStorage.setItem('token', JSON.stringify(token))
+    localStorage.setItem('username', JSON.stringify(userData.username))
     axios.defaults.headers.common['Authorization'] = token
     return token
   } catch (err: any) {
