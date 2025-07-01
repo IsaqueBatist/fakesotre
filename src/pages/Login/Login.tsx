@@ -89,17 +89,16 @@ export default function Login() {
   useEffect(() => {
     const restoreSession = async () => {
       const token = localStorage.getItem('token')
-      console.log(token)
       if (token) {
         try {
           axios.defaults.headers.common['Authorization'] = JSON.parse(token)
 
-          const username = localStorage.getItem('username')
+          const username = localStorage.getItem('username')?.replace(/"/g, '')
           if (!username) return
           const user = await filterUserByUsername(username)
           dispatch(login(user))
+          navigate('/')
         } catch (err) {
-          console.log(err)
           notifyError('Error restoring session')
         }
       }

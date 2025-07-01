@@ -31,6 +31,7 @@ export default function Header() {
   const handleLogout = () => {
     dispatch(logout())
     localStorage.removeItem('token')
+    localStorage.removeItem('username')
   }
 
   return (
